@@ -154,6 +154,7 @@ class _AzListViewState extends State<AzListView> {
     String tag = details.tag!;
     if (details.action == IndexBarDragDetails.actionDown ||
         details.action == IndexBarDragDetails.actionUpdate) {
+      HapticFeedback.vibrate();
       selectTag = tag;
       _scrollTopIndex(tag);
     }
@@ -163,17 +164,20 @@ class _AzListViewState extends State<AzListView> {
     Iterable<ItemPosition> positions =
         itemPositionsListener.itemPositions.value;
     if (positions.isNotEmpty) {
+
       ItemPosition itemPosition = positions
           .where((ItemPosition position) => position.itemTrailingEdge > 0)
           .reduce((ItemPosition min, ItemPosition position) =>
               position.itemTrailingEdge < min.itemTrailingEdge
                   ? position
                   : min);
+      HapticFeedback.vibrate();
       int index = itemPosition.index;
       String tag = widget.data[index].getSuspensionTag();
       if (selectTag != tag) {
         selectTag = tag;
         indexBarController.updateTagIndex(tag);
+        HapticFeedback.vibrate();
       }
     }
   }
