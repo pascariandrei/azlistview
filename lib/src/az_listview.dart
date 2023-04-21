@@ -16,7 +16,7 @@ class AzListView extends StatefulWidget {
     this.itemPositionsListener,
     this.physics,
     this.padding,
-    this.callback=null,
+    required this.callback,
     this.susItemBuilder,
     this.susItemHeight = kSusItemHeight,
     this.susPosition,
@@ -27,7 +27,7 @@ class AzListView extends StatefulWidget {
     this.indexBarItemHeight = kIndexBarItemHeight,
     this.indexBarAlignment = Alignment.centerRight,
     this.indexBarMargin,
-    this.indexBarOptions = const IndexBarOptions(),
+    this.indexBarOptions = const IndexBarOptions(), 
   }) : super(key: key);
 
   /// with  ISuspensionBean Data
