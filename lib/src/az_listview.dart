@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:flutter/services.dart';
 
 import 'az_common.dart';
 import 'index_bar.dart';
@@ -17,6 +16,7 @@ class AzListView extends StatefulWidget {
     this.itemPositionsListener,
     this.physics,
     this.padding,
+    this.callback,
     this.susItemBuilder,
     this.susItemHeight = kSusItemHeight,
     this.susPosition,
@@ -39,6 +39,8 @@ class AzListView extends StatefulWidget {
   /// Called to build children for the list with
   /// 0 <= index < itemCount.
   final IndexedWidgetBuilder itemBuilder;
+
+  final VoidCallback callback;
 
   /// Controller for jumping or scrolling to an item.
   final ItemScrollController? itemScrollController;
@@ -151,7 +153,7 @@ class _AzListViewState extends State<AzListView> {
     String tag = details.tag!;
     if (details.action == IndexBarDragDetails.actionDown ||
         details.action == IndexBarDragDetails.actionUpdate) {
-      HapticFeedback.vibrate();
+      callback();
       selectTag = tag;
       _scrollTopIndex(tag);
     }
@@ -168,13 +170,13 @@ class _AzListViewState extends State<AzListView> {
               position.itemTrailingEdge < min.itemTrailingEdge
                   ? position
                   : min);
-      HapticFeedback.vibrate();
+      callback();
       int index = itemPosition.index;
       String tag = widget.data[index].getSuspensionTag();
       if (selectTag != tag) {
         selectTag = tag;
         indexBarController.updateTagIndex(tag);
-        HapticFeedback.vibrate();
+        callback();
       }
     }
   }
