@@ -16,7 +16,7 @@ class AzListView extends StatefulWidget {
     this.itemPositionsListener,
     this.physics,
     this.padding,
-    this.callback,
+    this.callback=null,
     this.susItemBuilder,
     this.susItemHeight = kSusItemHeight,
     this.susPosition,
@@ -40,7 +40,7 @@ class AzListView extends StatefulWidget {
   /// 0 <= index < itemCount.
   final IndexedWidgetBuilder itemBuilder;
 
-  final VoidCallback callback;
+  final VoidCallback? callback;
 
   /// Controller for jumping or scrolling to an item.
   final ItemScrollController? itemScrollController;
