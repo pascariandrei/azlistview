@@ -153,7 +153,7 @@ class _AzListViewState extends State<AzListView> {
     String tag = details.tag!;
     if (details.action == IndexBarDragDetails.actionDown ||
         details.action == IndexBarDragDetails.actionUpdate) {
-      widget?.callback();
+      widget?.callback;
       selectTag = tag;
       _scrollTopIndex(tag);
     }
@@ -170,13 +170,13 @@ class _AzListViewState extends State<AzListView> {
               position.itemTrailingEdge < min.itemTrailingEdge
                   ? position
                   : min);
-      widget?.callback();
+      widget?.callback;
       int index = itemPosition.index;
       String tag = widget.data[index].getSuspensionTag();
       if (selectTag != tag) {
         selectTag = tag;
         indexBarController.updateTagIndex(tag);
-        widget?.callback();
+        widget?.callback;
       }
     }
   }
